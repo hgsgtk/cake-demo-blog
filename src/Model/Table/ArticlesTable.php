@@ -1,7 +1,22 @@
 <?php
+
+namespace App\Model\Table;
+
+use Cake\ORM\Table;
+
 /**
- * Created by PhpStorm.
- * User: kazukihigashiguchi
- * Date: 2019/01/05
- * Time: 18:50
+ * Class ArticlesTable
+ * @package App\Model\Table
  */
+class ArticlesTable extends Table
+{
+    /**
+     * @param array $config config of table
+     *
+     * @return void
+     */
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp');
+    }
+}

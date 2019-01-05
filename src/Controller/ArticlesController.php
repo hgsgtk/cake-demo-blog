@@ -1,7 +1,21 @@
 <?php
+
+namespace App\Controller;
+
 /**
- * Created by PhpStorm.
- * User: kazukihigashiguchi
- * Date: 2019/01/05
- * Time: 19:06
+ * Class ArticlesController
+ * @package App\Controller
  */
+class ArticlesController extends AppController
+{
+    /**
+     * @throws \Exception
+     * @return void
+     */
+    public function index()
+    {
+        $this->loadComponent('Paginator');
+        $articles = $this->Paginator->paginate($this->Articles->find());
+        $this->set(compact('articles'));
+    }
+}

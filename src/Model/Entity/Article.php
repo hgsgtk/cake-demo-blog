@@ -1,7 +1,18 @@
 <?php
+
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
 /**
- * Created by PhpStorm.
- * User: kazukihigashiguchi
- * Date: 2019/01/05
- * Time: 18:52
+ * Class Article
+ * @package App\Model\Entity
  */
+class Article extends Entity
+{
+    protected $_accessible = [
+        '*' => true,
+        'id' => false,
+        'slug' => false,
+    ];
+}
