@@ -1,11 +1,8 @@
-# CakePHP Application Skeleton
+# hgsgtk blog
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
+[![Build Status](https://travis-ci.com/hgsgtk/blog.svg?branch=master)](https://travis-ci.com/hgsgtk/blog)
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 3.x.
-
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+A blog created by  [CakePHP](https://cakephp.org) 3.x.
 
 ## Installation
 
@@ -32,12 +29,6 @@ bin/cake server -p 8765
 ```
 
 Then visit `http://localhost:8765` to see the welcome page.
-
-## Update
-
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
 
 ## Configuration
 
