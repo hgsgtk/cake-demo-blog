@@ -7,16 +7,19 @@ use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\TestCase;
+use Cake\TestSuite\IntegrationTestTrait;
 
 /**
  * Class ArticlesControllerTest
  * @package App\Test\TestCase\Controller
  */
-class ArticlesControllerTest extends IntegrationTestCase
+class ArticlesControllerTest extends TestCase
 {
+    use IntegrationTestTrait;
+
     public $fixtures = [
-        'app.articles',
+        'app.Articles',
     ];
 
     /**
