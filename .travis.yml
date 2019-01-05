@@ -11,8 +11,7 @@ services:
 env:
   global:
     - DEFAULT=1
-    - DATABASE_URL=mysql://travis@127.0.0.1/blog?encoding=utf8mb4&timezone=UTC&cacheMetadata=true
-    - DATABASE_TEST_URL=mysql://travis@127.0.0.1/test_blog?encoding=utf8mb4&timezone=UTC&cacheMetadata=true
+    - DATABASE_TEST_URL="mysql://travis@127.0.0.1/test_blog?encoding=utf8mb4&timezone=UTC&cacheMetadata=true"
 
 matrix:
   include:
@@ -23,7 +22,6 @@ matrix:
       env: PHPSTAN=1 DEFAULT=1
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS blog;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_blog;'
 
 before_script:
