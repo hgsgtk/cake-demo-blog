@@ -1,0 +1,17 @@
+version: "3"
+services:
+  dev-db:
+    image: mysql:8
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    hostname: dev-db
+    container_name: dev-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_secret
+    volumes:
+      - ./docker/mysql/conf:/etc/mysql/conf.d:cached
+      - ./dbdata:/var/lib/mysql:cached
+    ports:
+      - "3306:3306"
