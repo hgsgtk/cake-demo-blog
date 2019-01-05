@@ -1,5 +1,24 @@
 version: "3"
 services:
+  web:
+    build: ./docker/web
+    environment: &app-environment
+      DATABASE_URL: "mysql://dev_user:dev_secret@dev-db/blog?encoding=utf8mb4&timezone=UTC&cacheMetadata=true"
+      DATABASE_TEST_URL: "mysql://dev_user:dev_secret@dev-db/test_blog?encoding=utf8mb4&timezone=UTC&cacheMetadata=true"
+    volumes:
+      - ./:/var/www/html:cached
+      - ./docker/web/php.ini:/usr/local/etc/php/php.ini:cached
+    working_dir: /var/www/html
+    ports:
+      - "8000:80"
+  php-cli:
+    build: ./docker/web
+    environment:
+      <<: *app-environment
+    volumes:
+      - ./:/var/www/html:cached
+      - ./docker/web/php.ini:/usr/local/etc/php/php.ini:cached
+    working_dir: /var/www/html
   dev-db:
     image: mysql:8
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
@@ -11,7 +30,14 @@ services:
       MYSQL_USER: dev_user
       MYSQL_PASSWORD: dev_secret
     volumes:
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:cached
       - ./docker/mysql/conf:/etc/mysql/conf.d:cached
       - ./dbdata:/var/lib/mysql:cached
     ports:
       - "3306:3306"
+  composer:
+    build: ./docker/composer
+    volumes:
+      - ./:/app:cached
+      - ./docker/web/php.ini:/usr/local/etc/php/php.ini:cached
+    working_dir: /app
