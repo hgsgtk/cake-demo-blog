@@ -18,4 +18,11 @@ class ArticlesController extends AppController
         $articles = $this->Paginator->paginate($this->Articles->find());
         $this->set(compact('articles'));
     }
+
+    /**
+     * @return void
+     */
+    public function view()
+    {
+    }
 }

@@ -33,4 +33,16 @@ class ArticlesControllerTest extends TestCase
         $this->get('/articles/index');
         $this->assertResponseOK();
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \PHPUnit\Exception
+     */
+    public function view_200レスポンスが返ること()
+    {
+        $this->get('/articles/view');
+        $this->assertResponseOK();
+    }
 }
