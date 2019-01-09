@@ -57,4 +57,38 @@ class ArticlesControllerTest extends TestCase
         $this->get('/articles/view/first');
         $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \PHPUnit\Exception
+     */
+    public function add_GETリクエスト時200レスポンスが返ってくること()
+    {
+        $this->get('/articles/add');
+        $this->assertResponseOK();
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \PHPUnit\Exception
+     */
+    public function add_POSTリクエスト成功()
+    {
+        // 自動トークン生成をOFFにする
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = [
+            'user_id' => 1,
+            'title' => 'new-article',
+            'body' => 'new-article-body',
+        ];
+        $this->post('/articles/add', $data);
+
+        $this->assertResponseSuccess();
+    }
 }
