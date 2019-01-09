@@ -18,9 +18,6 @@ matrix:
     - php: 7.2
       env: PHPCS=1 DEFAULT=1
 
-    - php: 7.2
-      env: PHPSTAN=1 DEFAULT=1
-
 before_install:
   - mysql -u root -e 'CREATE DATABASE IF NOT EXISTS test_blog;'
 
