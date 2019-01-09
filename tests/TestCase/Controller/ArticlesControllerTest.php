@@ -101,7 +101,7 @@ class ArticlesControllerTest extends TestCase
      */
     public function edit_GETリクエスト時に200レスポンスが返ってくること()
     {
-        $this->get('/articles/edit');
+        $this->get('/articles/edit/first');
         $this->assertResponseOK();
     }
 
