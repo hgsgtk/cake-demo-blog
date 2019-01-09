@@ -76,7 +76,7 @@ class ArticlesControllerTest extends TestCase
      * @return void
      * @throws \PHPUnit\Exception
      */
-    public function add_POSTリクエスト成功()
+    public function add_POST記事作成リクエストを受付し成功する()
     {
         // 自動トークン生成をOFFにする
         $this->enableCsrfToken();
