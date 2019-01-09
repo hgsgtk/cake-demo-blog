@@ -23,7 +23,7 @@ class ArticlesController extends AppController
     }
 
     /**
-     * @param $slug
+     * @param string $slug article slug
      *
      * @return void
      */
