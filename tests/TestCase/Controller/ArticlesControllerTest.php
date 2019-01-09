@@ -12,6 +12,7 @@ use Cake\TestSuite\TestCase;
 
 /**
  * Class ArticlesControllerTest
+ *
  * @package App\Test\TestCase\Controller
  */
 class ArticlesControllerTest extends TestCase

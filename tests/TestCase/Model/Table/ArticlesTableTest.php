@@ -8,7 +8,10 @@ use Cake\TestSuite\TestCase;
 
 /**
  * Class ArticlesTableTest
+ *
  * @package App\Test\TestCase\Model\Table
+ *
+ * @coversDefaultClass \App\Model\Table\ArticlesTable
  *
  * @property  ArticlesTable Articles
  */
@@ -24,6 +27,8 @@ class ArticlesTableTest extends TestCase
 
     /**
      * @test
+     *
+     * @covers ::beforeSave
      */
     public function beforeSave_slugに値が設定される()
     {
