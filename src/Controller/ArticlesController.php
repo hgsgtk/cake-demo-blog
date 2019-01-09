@@ -66,4 +66,24 @@ class ArticlesController extends AppController
         }
         $this->set(compact('article'));
     }
+
+    /**
+     * @param string $slug slug of article
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function edit($slug)
+    {
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+        $this->set(compact('article'));
+    }
 }

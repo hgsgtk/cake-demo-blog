@@ -92,4 +92,51 @@ class ArticlesControllerTest extends TestCase
 
         $this->assertResponseSuccess();
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \PHPUnit\Exception
+     */
+    public function edit_GETリクエスト時に200レスポンスが返ってくること()
+    {
+        $this->get('/articles/edit');
+        $this->assertResponseOK();
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function edit_GETリクエストするとArticleがvarsに設定されている()
+    {
+        $this->get('/articles/edit/first');
+        $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function edit_POSTリクエストで記事更新を行うと結果が反映される()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = [
+            'user_id' => 1,
+            'title' => 'edited-title',
+            'body' => 'edited-article-body',
+        ];
+        $this->post('/articles/edit/first', $data);
+
+        $this->assertResponseSuccess();
+    }
 }
