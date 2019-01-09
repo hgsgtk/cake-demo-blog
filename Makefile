@@ -24,3 +24,4 @@ test:
 .PHONY: down
 down:
 	docker-compose down
+	docker container prune

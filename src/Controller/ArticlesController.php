@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Model\Table\ArticlesTable;
+
 /**
  * Class ArticlesController
  * @package App\Controller
+ * @property ArticlesTable Articles
  */
 class ArticlesController extends AppController
 {
@@ -20,9 +23,13 @@ class ArticlesController extends AppController
     }
 
     /**
+     * @param $slug
+     *
      * @return void
      */
-    public function view()
+    public function view($slug = null)
     {
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $this->set(compact('article'));
     }
 }

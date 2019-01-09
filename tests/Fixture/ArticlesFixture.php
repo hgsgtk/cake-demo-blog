@@ -8,7 +8,7 @@ class ArticlesFixture extends TestFixture
 {
     public $fields = [
         'id' => [
-            'type' => 'integer'
+            'type' => 'integer',
         ],
         'user_id' => [
             'type' => 'integer',
@@ -36,6 +36,18 @@ class ArticlesFixture extends TestFixture
                 'type' => 'primary',
                 'columns' => ['id'],
             ],
+        ],
+    ];
+
+    public $records = [
+        [
+            'user_id' => 1,
+            'title' => 'First Article',
+            'slug' => 'first',
+            'body' => 'First Article Body',
+            'published' => 1,
+            'created' => '2018-01-07 15:47:01',
+            'modified' => '2018-01-07 15:47:02',
         ],
     ];
 }
