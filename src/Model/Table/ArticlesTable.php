@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\ORM\Entity;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
+use Cake\Validation\Validator;
 
 /**
  * Class ArticlesTable
@@ -36,5 +37,22 @@ class ArticlesTable extends Table
             $sluggedTitle = Text::slug($entity->title);
             $entity->slug = substr($sluggedTitle, 0, 191);
         }
+    }
+
+    /**
+     * @param Validator $validator Cake Validator
+     *
+     * @return Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->notBlank('title')
+            ->minLength('title', 10)
+            ->maxLength('title', 255)
+            ->notBlank('body')
+            ->minLength('body', 10);
+
+        return $validator;
     }
 }
