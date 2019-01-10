@@ -35,14 +35,14 @@ class ArticlesTableTest extends TestCase
         $article = $this->Articles->newEntity(
             [
                 'user_id' => 1,
-                'title' => 'test',
-                'body' => 'test',
+                'title' => str_repeat('a', 10),
+                'body' => str_repeat('a', 10),
             ]
         );
         $result = $this->Articles->save($article);
 
         $this->assertInstanceOf('App\Model\Entity\Article', $result);
-        $this->assertSame('test', $result->slug);
+        $this->assertSame(str_repeat('a', 10), $result->slug);
     }
 
     /**
