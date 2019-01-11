@@ -139,4 +139,32 @@ class ArticlesControllerTest extends TestCase
 
         $this->assertResponseSuccess();
     }
+
+    /**
+     * @test
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function delete_GETリクエストの場合エラー()
+    {
+        $this->get('/articles/delete/first');
+
+        $this->assertResponseError();
+    }
+
+    /**
+     * @test
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function delete_削除成功した場合フラッシュメッセージが設定される()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->delete('/articles/delete/first');
+
+        $this->assertResponseSuccess();
+        $this->assertFlashElement('Flash/success');
+    }
 }
