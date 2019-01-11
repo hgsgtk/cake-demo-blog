@@ -49,6 +49,26 @@ class ArticlesTableTest extends TestCase
     /**
      * @test
      *
+     * @covers ::beforeSave
+     */
+    public function beforeSave_tag_stringに設定した値がtagsに設定されている()
+    {
+        $article = $this->Articles->newEntity(
+            [
+                'user_id' => 1,
+                'title' => str_repeat('a', 10),
+                'body' => str_repeat('a', 10),
+                'tag_string' => 'sample',
+            ]
+        );
+        $result = $this->Articles->save($article);
+
+        $this->assertSame('sample', $result->tags[0]->title);
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider dataProvider_validationDefault
      *
      * @param array $data
