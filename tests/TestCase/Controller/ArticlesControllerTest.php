@@ -211,4 +211,16 @@ class ArticlesControllerTest extends TestCase
         $this->assertResponseSuccess();
         $this->assertFlashElement('Flash/success');
     }
+
+    /**
+     * @test
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function tags_リクエストできる()
+    {
+        $this->get('/articles/tags/sample');
+
+        $this->assertResponseOK();
+    }
 }
