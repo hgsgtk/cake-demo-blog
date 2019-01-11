@@ -74,7 +74,7 @@ class Initial extends AbstractMigration
             ->addIndex(['user_id'])
             ->create();
 
-        $this->table('article_tags', ['id' => false, 'primary_key' => ['article_id', 'tag_id']])
+        $this->table('articles_tags', ['id' => false, 'primary_key' => ['article_id', 'tag_id']])
             ->addColumn('article_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
@@ -120,7 +120,7 @@ class Initial extends AbstractMigration
             )
             ->update();
 
-        $this->table('article_tags')
+        $this->table('articles_tags')
             ->addForeignKey(
                 'article_id',
                 'articles',
@@ -152,13 +152,13 @@ class Initial extends AbstractMigration
         $this->table('articles')
             ->dropForeignKey('user_id');
 
-        $this->table('article_tags')
+        $this->table('articles_tags')
             ->dropForeignKey('article_id')
             ->dropForeignKey('tag_id');
 
-        $this->table('users')->drop()->save();
+        $this->table('articles_tags')->drop()->save();
         $this->table('articles')->drop()->save();
-        $this->table('article_tags')->drop()->save();
         $this->table('tags')->drop()->save();
+        $this->table('users')->drop()->save();
     }
 }

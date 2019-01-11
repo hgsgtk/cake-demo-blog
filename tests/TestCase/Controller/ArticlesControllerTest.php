@@ -21,6 +21,8 @@ class ArticlesControllerTest extends TestCase
 
     public $fixtures = [
         'app.Articles',
+        'app.Tags',
+        'app.ArticlesTags',
     ];
 
     /**
@@ -75,6 +77,34 @@ class ArticlesControllerTest extends TestCase
      * @test
      *
      * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function add_GETリクエスト時ArticleEntityをviewにセットする()
+    {
+        $this->get('/articles/add');
+
+        $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function add_GETリクエスト時Tagsに関連付けたQueryオブジェクトがviewにセットする()
+    {
+        $this->get('/articles/add');
+
+        $this->assertInstanceOf('Cake\ORM\Query', $this->viewVariable('tags'));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
      * @throws \PHPUnit\Exception
      */
     public function add_POST記事作成リクエストを受付し成功する()
@@ -116,6 +146,20 @@ class ArticlesControllerTest extends TestCase
     {
         $this->get('/articles/edit/first');
         $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function edit_GETリクエスト時Tagsに関連付けたQueryオブジェクトがviewにセットする()
+    {
+        $this->get('/articles/edit/first');
+
+        $this->assertInstanceOf('Cake\ORM\Query', $this->viewVariable('tags'));
     }
 
     /**
