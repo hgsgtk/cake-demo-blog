@@ -112,4 +112,21 @@ class ArticlesController extends AppController
             return $this->redirect(['action' => 'index']);
         }
     }
+
+    /**
+     * @param mixed ...$tags tags in url parameters
+     *
+     * @return mixed
+     */
+    public function tags(...$tags)
+    {
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags,
+        ]);
+
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags,
+        ]);
+    }
 }

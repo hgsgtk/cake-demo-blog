@@ -3,6 +3,7 @@
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\ArticlesTable;
+use Cake\I18n\FrozenTime;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
@@ -17,7 +18,7 @@ use Cake\TestSuite\TestCase;
  */
 class ArticlesTableTest extends TestCase
 {
-    public $fixtures = ['app.Articles'];
+    public $fixtures = ['app.Articles', 'app.Tags', 'app.ArticlesTags'];
 
     public function setUp()
     {
@@ -43,6 +44,26 @@ class ArticlesTableTest extends TestCase
 
         $this->assertInstanceOf('App\Model\Entity\Article', $result);
         $this->assertSame(str_repeat('a', 10), $result->slug);
+    }
+
+    /**
+     * @test
+     *
+     * @covers ::beforeSave
+     */
+    public function beforeSave_tag_stringに設定した値がtagsに設定されている()
+    {
+        $article = $this->Articles->newEntity(
+            [
+                'user_id' => 1,
+                'title' => str_repeat('a', 10),
+                'body' => str_repeat('a', 10),
+                'tag_string' => 'sample',
+            ]
+        );
+        $result = $this->Articles->save($article);
+
+        $this->assertSame('sample', $result->tags[0]->title);
     }
 
     /**
@@ -101,5 +122,29 @@ class ArticlesTableTest extends TestCase
                 'expected' => 'body',
             ],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function findTagged_特定のタグでフィルターされた検索結果が返却される()
+    {
+        $query = $this->Articles->find('tagged', ['tags' => 'sample']);
+
+        $this->assertInstanceOf('Cake\ORM\Query', $query);
+
+        $result = $query->enableHydration(false)->toArray();
+        $expected = [
+            [
+                'id' => 1,
+                'user_id' => 1,
+                'title' => 'First Article',
+                'body' => 'First Article Body',
+                'published' => 1,
+                'created' => new FrozenTime('018-01-07 15:47:01'),
+                'slug' => 'first',
+            ],
+        ];
+        $this->assertEquals($expected, $result);
     }
 }
