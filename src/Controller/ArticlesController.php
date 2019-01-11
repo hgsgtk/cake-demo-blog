@@ -86,4 +86,21 @@ class ArticlesController extends AppController
         }
         $this->set(compact('article'));
     }
+
+    /**
+     * @param string $slug slug in url parameter
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function delete($slug)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 }

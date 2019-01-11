@@ -16,6 +16,11 @@
         </td>
         <td>
             <?= $this->Html->link('編集', ['action' => 'edit', $article->slug]) ?>
+            <?= $this->Form->postLink(
+                    '削除',
+                    ['action' => 'delete', $article->slug],
+                    ['confirm' => '本当に削除しますか？']
+            ) ?>
         </td>
     </tr>
     <?php endforeach; ?>
