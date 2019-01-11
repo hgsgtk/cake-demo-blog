@@ -25,7 +25,7 @@ class TagsTableTest extends TestCase
      */
     public $fixtures = [
         'app.Tags',
-        'app.ArticleTags'
+        'app.ArticlesTags'
     ];
 
     /**

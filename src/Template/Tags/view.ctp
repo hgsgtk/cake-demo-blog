@@ -11,8 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Tag'), ['action' => 'delete', $tag->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tag->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Tags'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Tag'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Article Tags'), ['controller' => 'ArticleTags', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Article Tag'), ['controller' => 'ArticleTags', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Article Tags'), ['controller' => 'ArticlesTags', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Article Tag'), ['controller' => 'ArticlesTags', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="tags view large-9 medium-8 columns content">
@@ -44,14 +44,14 @@
                 <th scope="col"><?= __('Tag Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($tag->article_tags as $articleTags): ?>
+            <?php foreach ($tag->article_tags as $ArticlesTags): ?>
             <tr>
-                <td><?= h($articleTags->article_id) ?></td>
-                <td><?= h($articleTags->tag_id) ?></td>
+                <td><?= h($ArticlesTags->article_id) ?></td>
+                <td><?= h($ArticlesTags->tag_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'ArticleTags', 'action' => 'view', $articleTags->article_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'ArticleTags', 'action' => 'edit', $articleTags->article_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ArticleTags', 'action' => 'delete', $articleTags->article_id], ['confirm' => __('Are you sure you want to delete # {0}?', $articleTags->article_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'ArticlesTags', 'action' => 'view', $ArticlesTags->article_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'ArticlesTags', 'action' => 'edit', $ArticlesTags->article_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ArticlesTags', 'action' => 'delete', $ArticlesTags->article_id], ['confirm' => __('Are you sure you want to delete # {0}?', $ArticlesTags->article_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

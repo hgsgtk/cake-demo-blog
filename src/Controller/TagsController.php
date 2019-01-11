@@ -35,7 +35,7 @@ class TagsController extends AppController
     public function view($id = null)
     {
         $tag = $this->Tags->get($id, [
-            'contain' => ['ArticleTags']
+            'contain' => ['ArticlesTags']
         ]);
 
         $this->set('tag', $tag);

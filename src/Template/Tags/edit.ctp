@@ -14,8 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Tags'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Article Tags'), ['controller' => 'ArticleTags', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Article Tag'), ['controller' => 'ArticleTags', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Article Tags'), ['controller' => 'ArticlesTags', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Article Tag'), ['controller' => 'ArticlesTags', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="tags form large-9 medium-8 columns content">

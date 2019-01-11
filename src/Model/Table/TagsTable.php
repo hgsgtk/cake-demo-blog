@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Tags Model
  *
- * @property \App\Model\Table\ArticleTagsTable|\Cake\ORM\Association\HasMany $ArticleTags
+ * @property \App\Model\Table\ArticlesTagsTable|\Cake\ORM\Association\HasMany $ArticlesTags
  *
  * @method \App\Model\Entity\Tag get($primaryKey, $options = [])
  * @method \App\Model\Entity\Tag newEntity($data = null, array $options = [])
@@ -41,7 +41,7 @@ class TagsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('ArticleTags', [
+        $this->hasMany('ArticlesTags', [
             'foreignKey' => 'tag_id'
         ]);
     }
