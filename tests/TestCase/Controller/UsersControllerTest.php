@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\UsersController;
+use App\Model\Table\ArticlesTable;
+use App\Model\Table\UsersTable;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -19,56 +22,72 @@ class UsersControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Users',
-        'app.Articles'
+        'app.Articles',
     ];
 
     /**
-     * Test index method
+     * @test
      *
+     * @throws
      * @return void
      */
-    public function testIndex()
+    public function loginページにアクセスできること()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/login');
+
+        $this->assertResponseOK();
     }
 
     /**
-     * Test view method
+     * @test
      *
      * @return void
      */
-    public function testView()
+    public function login認証失敗したらエラーメッセージを表示する()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->post('/users/login', [
+            'email' => 'myname@example.com',
+            'password' => 'mistype-password',
+        ]);
+
+        $this->assertResponseOk();
+        $this->assertResponseContains('ユーザー名またはパスワードが不正です。');
     }
 
     /**
-     * Test add method
+     * @test
      *
      * @return void
      */
-    public function testAdd()
+    public function login認証成功したら認証セッションを書き込み、元のページにリダイレクトする()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->post('/users/login?redirect=%2Farticles%2Fadd', [
+            'email' => 'myname@example.com',
+            'password' => 'password',
+        ]);
+
+        $this->assertRedirect('/articles/add');
+        $this->assertSession(1, 'Auth.User.id');
     }
 
     /**
-     * Test edit method
+     * @test
      *
      * @return void
      */
-    public function testEdit()
+    public function logoutするとセッションからユーザー情報が削除されている()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
+        $this->session(['Auth.User.id' => 1]);
 
-    /**
-     * Test delete method
-     *
-     * @return void
-     */
-    public function testDelete()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/logout');
+
+        $this->assertSession([], 'Auth');
+        $this->assertRedirect('/users/login');
     }
 }

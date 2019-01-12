@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Entity\User;
 use App\Model\Table\ArticlesTable;
 
 /**
@@ -22,6 +23,8 @@ class ArticlesController extends AppController
 
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
+
+        $this->Auth->allow(['tags']);
     }
 
     /**
@@ -55,7 +58,7 @@ class ArticlesController extends AppController
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            $article->user_id = 1;
+            $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
@@ -82,7 +85,9 @@ class ArticlesController extends AppController
             ->contain('Tags')
             ->firstOrFail();
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->getData());
+            $this->Articles->patchEntity($article, $this->request->getData(), [
+                'accessibleFields' => ['user_id' => false]
+            ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
 
@@ -128,5 +133,27 @@ class ArticlesController extends AppController
             'articles' => $articles,
             'tags' => $tags,
         ]);
+    }
+
+    /**
+     * @param User $user login user
+     *
+     * @return bool
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['add', 'tags'])) {
+            return true;
+        }
+
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+
+        $article = $this->Articles->findBySlug($slug)->first();
+
+        return $article->user_id === $user['id'];
     }
 }
