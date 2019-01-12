@@ -21,8 +21,9 @@ class ArticlesControllerTest extends TestCase
 
     public $fixtures = [
         'app.Articles',
-        'app.Tags',
         'app.ArticlesTags',
+        'app.Users',
+        'app.Tags',
     ];
 
     /**
@@ -69,6 +70,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function add_GETリクエスト時200レスポンスが返ってくること()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/add');
         $this->assertResponseOK();
     }
@@ -82,6 +85,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function add_GETリクエスト時ArticleEntityをviewにセットする()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/add');
 
         $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
@@ -96,6 +101,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function add_GETリクエスト時Tagsに関連付けたQueryオブジェクトがviewにセットする()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/add');
 
         $this->assertInstanceOf('Cake\ORM\Query', $this->viewVariable('tags'));
@@ -112,6 +119,8 @@ class ArticlesControllerTest extends TestCase
         // 自動トークン生成をOFFにする
         $this->enableCsrfToken();
         $this->enableSecurityToken();
+
+        $this->session(['Auth.User.id' => 1]);
 
         $data = [
             'user_id' => 1,
@@ -131,6 +140,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function edit_GETリクエスト時に200レスポンスが返ってくること()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/edit/first');
         $this->assertResponseOK();
     }
@@ -144,6 +155,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function edit_GETリクエストするとArticleがvarsに設定されている()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/edit/first');
         $this->assertInstanceOf('App\Model\Entity\Article', $this->viewVariable('article'));
     }
@@ -157,6 +170,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function edit_GETリクエスト時Tagsに関連付けたQueryオブジェクトがviewにセットする()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/edit/first');
 
         $this->assertInstanceOf('Cake\ORM\Query', $this->viewVariable('tags'));
@@ -171,6 +186,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function edit_POSTリクエストで記事更新を行うと結果が反映される()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->enableCsrfToken();
         $this->enableSecurityToken();
 
@@ -191,6 +208,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function delete_GETリクエストの場合エラー()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->get('/articles/delete/first');
 
         $this->assertResponseError();
@@ -203,6 +222,8 @@ class ArticlesControllerTest extends TestCase
      */
     public function delete_削除成功した場合フラッシュメッセージが設定される()
     {
+        $this->session(['Auth.User.id' => 1]);
+
         $this->enableCsrfToken();
         $this->enableSecurityToken();
 
