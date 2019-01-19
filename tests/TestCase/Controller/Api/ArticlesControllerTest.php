@@ -101,4 +101,23 @@ class ArticlesControllerTest extends TestCase
         $expected = json_encode($expected, JSON_PRETTY_PRINT);
         $this->assertSame($expected, (string)$this->_response->getBody());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function 記事詳細取得にて成功レスポンスが返却される()
+    {
+        $this->configRequest([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ]);
+        $this->get('/api/articles/view/first');
+
+        $this->assertResponseSuccess();
+    }
 }
