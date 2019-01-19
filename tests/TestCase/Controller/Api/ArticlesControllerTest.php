@@ -60,13 +60,14 @@ class ArticlesControllerTest extends TestCase
         $expected = [
             'articles' => [
                 [
+                    'id' => 1,
                     'user_id' => 1,
                     'title' => 'First Article',
                     'slug' => 'first',
                     'body' => 'First Article Body',
                     'published' => 1,
-                    'created' => '2018-01-07 15:47:01',
-                    'modified' => '2018-01-07 15:47:02',
+                    'created' => '2018-01-07T15:47:01+00:00',
+                    'modified' => '2018-01-07T15:47:02+00:00',
                 ],
             ],
         ];
