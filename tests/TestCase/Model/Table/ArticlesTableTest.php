@@ -23,7 +23,7 @@ class ArticlesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->Articles = TableRegistry::get('Articles');
+        $this->Articles = TableRegistry::getTableLocator()->get('Articles');
     }
 
     /**
