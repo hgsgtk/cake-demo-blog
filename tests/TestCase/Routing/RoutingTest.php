@@ -24,7 +24,6 @@ class RoutingTest extends TestCase
     public function Route正引き(string $url, array $expected, array $expected_pass)
     {
         $actual = Router::parseRequest(new ServerRequest($url));
-        $this->assertSame($expected['prefix'], $actual['prefix']);
         $this->assertSame($expected['controller'], $actual['controller']);
         $this->assertSame($expected['action'], $actual['action']);
         $this->assertSame($expected_pass, $actual['pass']);
