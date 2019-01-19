@@ -40,4 +40,37 @@ class ArticlesControllerTest extends TestCase
         $this->assertResponseOk();
         $this->assertSame('application/json', $this->_response->getType());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function 記事一覧取得にて一覧情報が返却される()
+    {
+        $this->configRequest([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ]);
+        $this->get('/api/articles/index');
+
+        $expected = [
+            'articles' => [
+                [
+                    'user_id' => 1,
+                    'title' => 'First Article',
+                    'slug' => 'first',
+                    'body' => 'First Article Body',
+                    'published' => 1,
+                    'created' => '2018-01-07 15:47:01',
+                    'modified' => '2018-01-07 15:47:02',
+                ],
+            ],
+        ];
+        $expected = json_encode($expected, JSON_PRETTY_PRINT);
+        $this->assertSame($expected, (string)$this->_response->getBody());
+    }
 }
