@@ -12,4 +12,29 @@ use App\Model\Table\ArticlesTable;
  */
 class ArticlesController extends AppController
 {
+    /**
+     * @throws \Exception
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent('RequestHandler');
+    }
+
+    /**
+     * 記事一覧
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $articles = [];
+        $this->set([
+            '_serialize' => ['articles'],
+            'articles' => $articles,
+        ]);
+    }
 }

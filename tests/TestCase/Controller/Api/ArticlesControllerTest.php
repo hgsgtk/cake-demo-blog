@@ -30,7 +30,13 @@ class ArticlesControllerTest extends TestCase
      */
     public function 記事一覧取得にて成功レスポンスが返却される()
     {
+        $this->configRequest([
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+        ]);
         $this->get('/api/articles/index');
+
         $this->assertResponseOk();
     }
 }
