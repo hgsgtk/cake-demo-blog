@@ -82,15 +82,37 @@ class RoutingTest extends TestCase
                 ],
                 'expected_pass' => ['funny', 'cat', 'gifs'],
             ],
-            '/api/articles' => [
-                'url' => '/api/articles',
-                'expected' => [
-                    'prefix' => 'api',
-                    'controller' => 'Articles',
-                    'action' => 'index'
-                ],
-                'expected_pass' => [],
-            ],
         ];
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function apiプレフィックスRoute正引き()
+    {
+        $actual = Router::parseRequest(new ServerRequest('/api/articles'));
+        $this->assertSame('api', $actual['prefix']);
+        $this->assertSame('Articles', $actual['controller']);
+        $this->assertSame('index', $actual['action']);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function apiプレフィックスRoute逆引き()
+    {
+        $this->assertSame('/api/articles', Router::url([
+            'prefix' => 'api',
+            'controller' => 'Articles',
+            'action' => 'index',
+        ]));
     }
 }
