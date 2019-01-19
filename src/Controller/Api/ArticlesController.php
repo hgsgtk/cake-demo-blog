@@ -31,7 +31,6 @@ class ArticlesController extends AppController
      */
     public function index()
     {
-        // TODO: 記事一覧をデータベースから取得する
         $articles = $this->Articles->find('all');
         $this->set([
             '_serialize' => ['articles'],
