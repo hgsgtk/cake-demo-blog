@@ -37,4 +37,18 @@ class ArticlesController extends AppController
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * 記事詳細
+     *
+     * @return void
+     */
+    public function view()
+    {
+        $article = [];
+        $this->set([
+            '_serialize' => ['article'],
+            'article' => $article,
+        ]);
+    }
 }

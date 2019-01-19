@@ -120,4 +120,25 @@ class ArticlesControllerTest extends TestCase
 
         $this->assertResponseSuccess();
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \PHPUnit\Exception
+     */
+    public function 記事詳細取得にてjson形式のレスポンスが返却される()
+    {
+        $this->configRequest([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ]);
+        $this->get('/api/articles/view/first');
+
+        $this->assertSame('application/json', $this->_response->getType());
+    }
+
+
 }
