@@ -41,11 +41,13 @@ class ArticlesController extends AppController
     /**
      * 記事詳細
      *
+     * @param string $slug article slug
+     *
      * @return void
      */
-    public function view()
+    public function view($slug = null)
     {
-        $article = [];
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
         $this->set([
             '_serialize' => ['article'],
             'article' => $article,
