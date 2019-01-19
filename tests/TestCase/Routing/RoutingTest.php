@@ -44,7 +44,6 @@ class RoutingTest extends TestCase
         $this->assertSame($expected, Router::url($parseArray));
     }
 
-
     public function dataRouting(): array
     {
         return [
@@ -81,6 +80,14 @@ class RoutingTest extends TestCase
                     'funny', 'cat', 'gifs',
                 ],
                 'expected_pass' => ['funny', 'cat', 'gifs'],
+            ],
+            '/api/articles' => [
+                'url' => '/api/articles',
+                'expected' => [
+                    'controller' => 'Articles',
+                    'action' => 'index'
+                ],
+                'expected_pass' => [],
             ],
         ];
     }

@@ -54,6 +54,10 @@ Router::scope(
     }
 );
 
+Router::prefix('api', function (RouteBuilder $routes) {
+    $routes->fallbacks(DashedRoute::class);
+});
+
 Router::scope('/', function (RouteBuilder $routes) {
     // Register scoped middleware for in scopes.
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
