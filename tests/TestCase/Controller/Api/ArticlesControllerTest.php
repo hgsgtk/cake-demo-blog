@@ -38,5 +38,6 @@ class ArticlesControllerTest extends TestCase
         $this->get('/api/articles/index');
 
         $this->assertResponseOk();
+        $this->assertSame('application/json', $this->_response->getType());
     }
 }
