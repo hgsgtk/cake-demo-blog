@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\Controller\Api;
 
 use App\Controller\Api\ArticlesController;
@@ -19,37 +20,17 @@ class ArticlesControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Articles'
+        'app.Articles',
     ];
 
     /**
      * @test
      *
-     * @throws \PHPUnit\Exception
-     *
-     * @return void
-     */
-    public function 記事一覧取得にて成功レスポンスが返却される()
-    {
-        $this->configRequest([
-            'headers' => [
-                'Accept' => 'application/json'
-            ],
-        ]);
-        $this->get('/api/articles/index');
-
-        $this->assertResponseOk();
-        $this->assertSame('application/json', $this->_response->getType());
-    }
-
-    /**
-     * @test
-     *
      * @return void
      *
      * @throws \PHPUnit\Exception
      */
-    public function 記事一覧取得にて一覧情報が返却される()
+    public function 記事一覧取得にて記事一覧が返却される()
     {
         $this->configRequest([
             'headers' => [
@@ -63,9 +44,9 @@ class ArticlesControllerTest extends TestCase
                 [
                     'id' => 1,
                     'user_id' => 1,
-                    'title' => 'First Article',
-                    'slug' => 'first',
-                    'body' => 'First Article Body',
+                    'title' => 'First Published Article',
+                    'slug' => 'first-published-article',
+                    'body' => 'First Published Body',
                     'published' => 1,
                     'created' => '2018-01-07T15:47:01+00:00',
                     'modified' => '2018-01-07T15:47:02+00:00',
@@ -79,15 +60,12 @@ class ArticlesControllerTest extends TestCase
     /**
      * @test
      *
-     * @return void
-     *
      * @throws \PHPUnit\Exception
+     *
+     * @return void
      */
-    public function 記事一覧取得にてレコードがない場合、0件の情報が返却される()
+    public function 記事一覧取得にて成功レスポンスが返却される()
     {
-        $Articles = TableRegistry::getTableLocator()->get('Articles');
-        $Articles->deleteAll([]);
-
         $this->configRequest([
             'headers' => [
                 'Accept' => 'application/json',
@@ -95,10 +73,7 @@ class ArticlesControllerTest extends TestCase
         ]);
         $this->get('/api/articles/index');
 
-        $expected = [
-            "articles" => [],
-        ];
-        $expected = json_encode($expected, JSON_PRETTY_PRINT);
-        $this->assertSame($expected, (string)$this->_response->getBody());
+        $this->assertResponseOk();
+        $this->assertSame('application/json', $this->_response->getType());
     }
 }

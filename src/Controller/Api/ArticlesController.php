@@ -25,13 +25,16 @@ class ArticlesController extends AppController
     }
 
     /**
-     * 記事一覧
+     * list articles
      *
      * @return void
      */
     public function index()
     {
-        $articles = $this->Articles->find('all');
+        $articles = $this->Articles
+            ->find()
+            ->where(['published' => 1])
+            ->all();
         $this->set([
             '_serialize' => ['articles'],
             'articles' => $articles,

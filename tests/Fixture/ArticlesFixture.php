@@ -42,10 +42,19 @@ class ArticlesFixture extends TestFixture
     public $records = [
         [
             'user_id' => 1,
-            'title' => 'First Article',
-            'slug' => 'first',
-            'body' => 'First Article Body',
+            'title' => 'First Published Article',
+            'slug' => 'first-published-article',
+            'body' => 'First Published Body',
             'published' => 1,
+            'created' => '2018-01-07 15:47:01',
+            'modified' => '2018-01-07 15:47:02',
+        ],
+        [
+            'user_id' => 1,
+            'title' => 'Unpublished Article',
+            'slug' => 'unpublished-article',
+            'body' => 'Unpublished Article Body',
+            'published' => 0,
             'created' => '2018-01-07 15:47:01',
             'modified' => '2018-01-07 15:47:02',
         ],
