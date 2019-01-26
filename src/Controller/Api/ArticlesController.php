@@ -37,4 +37,16 @@ class ArticlesController extends AppController
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * @param null $slug article slug
+     */
+    public function view($slug = null)
+    {
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $this->set([
+            '_serialize' => ['article'],
+            'article' => $article,
+        ]);
+    }
 }
