@@ -45,7 +45,6 @@ class ArticlesControllerTest extends TestCase
      */
     public function 記事一覧取得にて成功レスポンスが返却される()
     {
-
         $this->get('/api/articles/index');
 
         $this->assertResponseOk();
@@ -155,21 +154,5 @@ class ArticlesControllerTest extends TestCase
         $this->get('/api/articles/view/notfound');
 
         $this->assertResponseCode(404);
-    }
-
-    /**
-     * @test
-     *
-     * @return void
-     *
-     * @throws \PHPUnit\Exception
-     */
-    public function Name()
-    {
-        foreach ($i as $item) {
-            if ($i==0) {
-
-            }
-        }
     }
 }

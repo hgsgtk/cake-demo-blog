@@ -40,6 +40,8 @@ class ArticlesController extends AppController
 
     /**
      * @param null $slug article slug
+     *
+     * @return void
      */
     public function view($slug = null)
     {
