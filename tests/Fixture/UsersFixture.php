@@ -12,7 +12,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class UsersFixture extends TestFixture
 {
-
     /**
      * Fields
      *
@@ -49,7 +48,7 @@ class UsersFixture extends TestFixture
                 'email' => 'myname@example.com',
                 'password' => $hasher->hash('password'),
                 'created' => '2019-01-11 07:09:31',
-                'modified' => '2019-01-11 07:09:31'
+                'modified' => '2019-01-11 07:09:31',
             ],
         ];
         parent::init();

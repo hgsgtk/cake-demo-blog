@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\TagsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -21,7 +20,7 @@ final class TagsControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Tags',
-        'app.ArticlesTags'
+        'app.ArticlesTags',
     ];
 
     /**

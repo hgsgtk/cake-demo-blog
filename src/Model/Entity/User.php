@@ -19,7 +19,6 @@ use Cake\ORM\Entity;
  */
 class User extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -34,7 +33,7 @@ class User extends Entity
         'password' => true,
         'created' => true,
         'modified' => true,
-        'articles' => true
+        'articles' => true,
     ];
 
     /**
@@ -43,7 +42,7 @@ class User extends Entity
      * @var array
      */
     protected $_hidden = [
-        'password'
+        'password',
     ];
 
     /**

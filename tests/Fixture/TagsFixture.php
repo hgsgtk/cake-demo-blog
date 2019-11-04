@@ -11,7 +11,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class TagsFixture extends TestFixture
 {
-
     /**
      * Fields
      *
@@ -46,13 +45,13 @@ class TagsFixture extends TestFixture
                 'id' => 1,
                 'title' => 'sample',
                 'created' => '2019-01-11 10:53:55',
-                'modified' => '2019-01-11 10:53:55'
+                'modified' => '2019-01-11 10:53:55',
             ],
             [
                 'id' => 2,
                 'title' => 'sample2',
                 'created' => '2019-01-11 10:53:55',
-                'modified' => '2019-01-11 10:53:55'
+                'modified' => '2019-01-11 10:53:55',
             ],
         ];
         parent::init();

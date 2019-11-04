@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\AppController;
-
 /**
  * Tags Controller
  *
@@ -14,7 +12,6 @@ use App\Controller\AppController;
  */
 class TagsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -37,7 +34,7 @@ class TagsController extends AppController
     public function view($id = null)
     {
         $tag = $this->Tags->get($id, [
-            'contain' => ['ArticlesTags']
+            'contain' => ['ArticlesTags'],
         ]);
 
         $this->set('tag', $tag);
@@ -73,7 +70,7 @@ class TagsController extends AppController
     public function edit($id = null)
     {
         $tag = $this->Tags->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tag = $this->Tags->patchEntity($tag, $this->request->getData());

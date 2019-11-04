@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller\Api;
 
-use App\Controller\Api\ArticlesController;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -21,7 +20,7 @@ final class ArticlesControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Articles'
+        'app.Articles',
     ];
 
     /**
@@ -35,7 +34,7 @@ final class ArticlesControllerTest extends TestCase
     {
         $this->configRequest([
             'headers' => [
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ],
         ]);
         $this->get('/api/articles/index');

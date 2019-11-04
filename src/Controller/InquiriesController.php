@@ -22,7 +22,6 @@ class InquiriesController extends AppController
         $this->Auth->allow();
     }
 
-
     /**
      * Index method
      *
@@ -45,7 +44,7 @@ class InquiriesController extends AppController
     public function view($id = null)
     {
         $inquiry = $this->Inquiries->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         $this->set('inquiry', $inquiry);

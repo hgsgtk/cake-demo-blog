@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Composer\DependencyResolver\Rule;
 
 /**
  * Users Model
@@ -27,7 +25,6 @@ use Composer\DependencyResolver\Rule;
  */
 class UsersTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -45,7 +42,7 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Articles', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
         ]);
     }
 

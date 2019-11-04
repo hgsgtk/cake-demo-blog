@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Test\TestCase\Routing;
 
@@ -31,7 +32,7 @@ class RoutingTest extends TestCase
 
         $actual = Router::parseRequest(new ServerRequest([
             'url' => $url,
-            'environment' => ['REQUEST_METHOD' => 'GET']
+            'environment' => ['REQUEST_METHOD' => 'GET'],
         ]));
         $this->assertSame($expected['controller'], $actual['controller']);
         $this->assertSame($expected['action'], $actual['action']);
@@ -63,7 +64,7 @@ class RoutingTest extends TestCase
                 'expected' => [
                     'controller' => 'Pages',
                     'action' => 'display',
-                    'home'
+                    'home',
                 ],
                 'expected_pass' => ['home'],
             ],
@@ -107,7 +108,7 @@ class RoutingTest extends TestCase
         $this->markTestSkipped('in progress...');
 
         $actual = Router::parseRequest(new ServerRequest([
-            'url'=> '/api/articles'
+            'url' => '/api/articles',
         ]));
         $this->assertSame('api', $actual['prefix']);
         $this->assertSame('Articles', $actual['controller']);

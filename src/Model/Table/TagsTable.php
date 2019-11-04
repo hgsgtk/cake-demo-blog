@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -26,7 +25,6 @@ use Cake\Validation\Validator;
  */
 class TagsTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -44,7 +42,7 @@ class TagsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->hasMany('ArticlesTags', [
-            'foreignKey' => 'tag_id'
+            'foreignKey' => 'tag_id',
         ]);
     }
 

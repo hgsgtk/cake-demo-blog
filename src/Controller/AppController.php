@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Entity\User;
 use Cake\Controller\Controller;
 
 /**
@@ -42,7 +41,7 @@ class AppController extends Controller
     public function initialize(): void
     {
         parent::initialize();
-        
+
         $this->loadComponent('Flash');
 
         /*
@@ -66,13 +65,13 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login',
             ],
-            'unauthorizedRedirect' => $this->referer()
+            'unauthorizedRedirect' => $this->referer(),
         ]);
         $this->Auth->allow(['display', 'view', 'index']);
     }
 
     /**
-     * @param User $user login user
+     * @param \App\Model\Entity\User $user login user
      *
      * @return bool
      */

@@ -39,8 +39,8 @@ use Psr\Http\Message\ServerRequestInterface;
 class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
-     * @param ServerRequestInterface $request
-     * @return AuthenticationServiceInterface
+     * @param \Psr\Http\Message\ServerRequestInterface $request request
+     * @return \Authentication\AuthenticationServiceInterface
      */
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
@@ -58,7 +58,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
         return $service;
     }
-
 
     /**
      * {@inheritDoc}

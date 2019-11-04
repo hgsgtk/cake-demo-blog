@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\InquiriesController;
-use App\Model\Entity\Inquiry;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -22,7 +20,7 @@ final class InquiriesControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Inquiries'
+        'app.Inquiries',
     ];
 
     /**

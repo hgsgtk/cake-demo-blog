@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Entity\User;
-use App\Model\Table\ArticlesTable;
-
 /**
  * Class ArticlesController
  * @package App\Controller
@@ -67,7 +64,6 @@ class ArticlesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your article.'));
-
         }
         $tags = $this->Articles->Tags->find('list');
 
@@ -88,7 +84,7 @@ class ArticlesController extends AppController
             ->firstOrFail();
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
-                'accessibleFields' => ['user_id' => false]
+                'accessibleFields' => ['user_id' => false],
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
@@ -117,6 +113,7 @@ class ArticlesController extends AppController
             $this->log('Error while deleting article');
 
             $this->Flash->error(__('It is failed to delete {0} article.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
         $this->Flash->success(__('The {0} article has been deleted.', $article->title));
@@ -142,7 +139,7 @@ class ArticlesController extends AppController
     }
 
     /**
-     * @param User $user login user
+     * @param \App\Model\Entity\User $user login user
      *
      * @return bool
      */

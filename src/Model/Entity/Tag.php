@@ -17,7 +17,6 @@ use Cake\ORM\Entity;
  */
 class Tag extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -31,6 +30,6 @@ class Tag extends Entity
         'title' => true,
         'created' => true,
         'modified' => true,
-        'article_tags' => true
+        'article_tags' => true,
     ];
 }

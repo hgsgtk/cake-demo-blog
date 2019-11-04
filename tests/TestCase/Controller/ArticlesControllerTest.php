@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\ArticlesController;
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 

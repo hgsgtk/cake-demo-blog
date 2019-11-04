@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\Event\Event;
-use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
@@ -14,7 +12,7 @@ use Cake\Validation\Validator;
  * Class ArticlesTable
  * @package App\Model\Table
  *
- * @property TagsTable $Tags
+ * @property \App\Model\Table\TagsTable $Tags
  */
 class ArticlesTable extends Table
 {
@@ -30,8 +28,8 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Event $event Cake event
-     * @param Entity $entity ORM Entity
+     * @param \Cake\Event\Event $event Cake event
+     * @param \Cake\ORM\Entity $entity ORM Entity
      * @param array $options option parameters
      *
      * @return void
@@ -81,9 +79,9 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Validator $validator Cake Validator
+     * @param \Cake\Validation\Validator $validator Cake Validator
      *
-     * @return Validator
+     * @return \Cake\Validation\Validator
      */
     public function validationDefault(Validator $validator): Validator
     {
@@ -98,10 +96,10 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Query $query Cake Query object
+     * @param \Cake\ORM\Query $query Cake Query object
      * @param array $options query options
      *
-     * @return Query
+     * @return \Cake\ORM\Query
      */
     public function findTagged(Query $query, array $options)
     {

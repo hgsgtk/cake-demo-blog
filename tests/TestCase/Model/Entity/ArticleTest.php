@@ -13,7 +13,7 @@ use Cake\TestSuite\TestCase;
 final class ArticleTest extends TestCase
 {
     public $fixtures = ['app.Articles', 'app.Tags', 'app.ArticlesTags'];
-    
+
     /**
      *
      * Test subject

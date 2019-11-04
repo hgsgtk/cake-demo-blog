@@ -18,7 +18,6 @@ use Cake\ORM\Entity;
  */
 class Inquiry extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -34,6 +33,6 @@ class Inquiry extends Entity
         'email' => true,
         'client_ip' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
     ];
 }
