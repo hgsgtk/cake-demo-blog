@@ -20,9 +20,10 @@ class ArticlesTableTest extends TestCase
 {
     public $fixtures = ['app.Articles', 'app.Tags', 'app.ArticlesTags'];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
+
         $this->Articles = TableRegistry::getTableLocator()->get('Articles');
     }
 

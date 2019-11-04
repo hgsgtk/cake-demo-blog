@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -14,9 +16,7 @@
  */
 namespace App\Controller;
 
-use App\Model\Entity\User;
 use Cake\Controller\Controller;
-use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -28,7 +28,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -38,13 +37,11 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
+        $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
         /*
@@ -52,34 +49,5 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
-
-        $this->loadComponent('Auth', [
-            'authorized' => 'Controller',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password',
-                    ],
-                ],
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login',
-            ],
-            'unauthorizedRedirect' => $this->referer()
-        ]);
-
-        $this->Auth->allow(['display', 'view', 'index']);
-    }
-
-    /**
-     * @param User $user login user
-     *
-     * @return bool
-     */
-    public function isAuthorized($user)
-    {
-        return false;
     }
 }
