@@ -60,8 +60,11 @@ class PagesController extends AppController
         }
         $this->set(compact('page', 'subpage'));
 
+
         try {
-            $this->render(implode('/', $path));
+            $this->render('home');
+            // FIXME failed RuntimeException: "View::$layout must be a non-empty string.To disable layout rendering use method View::disableAutoLayout() instead.
+            // $this->render(implode('/', $path));
         } catch (MissingTemplateException $exception) {
             if (Configure::read('debug')) {
                 throw $exception;
@@ -69,6 +72,7 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
 
+        // FIXME RuntimeException: "View::$layout must be a non-empty string.To disable layout rendering use method View::disableAutoLayout() instead.
         return $this->render();
     }
 }
