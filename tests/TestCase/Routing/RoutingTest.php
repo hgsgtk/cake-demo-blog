@@ -100,6 +100,8 @@ class RoutingTest extends TestCase
      */
     public function apiプレフィックスRoute正引き()
     {
+        $this->markTestIncomplete('in progress...');
+
         $actual = Router::parseRequest(new ServerRequest([
             'url'=> '/api/articles'
         ]));
@@ -117,6 +119,8 @@ class RoutingTest extends TestCase
      */
     public function apiプレフィックスRoute逆引き()
     {
+        $this->markTestIncomplete('in progress...');
+
         $this->assertSame('/api/articles', Router::url([
             'prefix' => 'api',
             'controller' => 'Articles',
