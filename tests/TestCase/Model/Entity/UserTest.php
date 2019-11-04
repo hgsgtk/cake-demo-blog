@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Model\Entity;
 
 use App\Model\Entity\User;
@@ -8,9 +10,8 @@ use Cake\TestSuite\TestCase;
 /**
  * App\Model\Entity\User Test Case
  */
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
-
     /**
      * Test subject
      *
@@ -23,7 +24,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->User = new User();
@@ -34,7 +35,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->User);
 

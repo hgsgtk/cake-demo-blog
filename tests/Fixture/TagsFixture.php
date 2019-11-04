@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
@@ -9,7 +11,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class TagsFixture extends TestFixture
 {
-
     /**
      * Fields
      *
@@ -37,20 +38,20 @@ class TagsFixture extends TestFixture
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->records = [
             [
                 'id' => 1,
                 'title' => 'sample',
                 'created' => '2019-01-11 10:53:55',
-                'modified' => '2019-01-11 10:53:55'
+                'modified' => '2019-01-11 10:53:55',
             ],
             [
                 'id' => 2,
                 'title' => 'sample2',
                 'created' => '2019-01-11 10:53:55',
-                'modified' => '2019-01-11 10:53:55'
+                'modified' => '2019-01-11 10:53:55',
             ],
         ];
         parent::init();

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
@@ -8,22 +9,51 @@ use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * Class ArticlesTableTest
- *
- * @package App\Test\TestCase\Model\Table
- *
- * @coversDefaultClass \App\Model\Table\ArticlesTable
- *
- * @property  ArticlesTable Articles
+ * App\Model\Table\ArticlesTable Test Case
  */
-class ArticlesTableTest extends TestCase
+final class ArticlesTableTest extends TestCase
 {
-    public $fixtures = ['app.Articles', 'app.Tags', 'app.ArticlesTags'];
+    /**
+     * Test subject
+     *
+     * @var \App\Model\Table\ArticlesTable
+     */
+    protected $Articles;
 
-    public function setUp()
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    protected $fixtures = [
+        'app.Articles',
+        'app.Users',
+        'app.Tags',
+        'app.ArticlesTags',
+    ];
+
+    /**
+     * setUp method
+     *
+     * @return void
+     */
+    public function setUp(): void
     {
         parent::setUp();
-        $this->Articles = TableRegistry::getTableLocator()->get('Articles');
+        $config = TableRegistry::getTableLocator()->exists('Articles') ? [] : ['className' => ArticlesTable::class];
+        $this->Articles = TableRegistry::getTableLocator()->get('Articles', $config);
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        unset($this->Articles);
+
+        parent::tearDown();
     }
 
     /**
@@ -49,26 +79,6 @@ class ArticlesTableTest extends TestCase
     /**
      * @test
      *
-     * @covers ::beforeSave
-     */
-    public function beforeSave_tag_stringに設定した値がtagsに設定されている()
-    {
-        $article = $this->Articles->newEntity(
-            [
-                'user_id' => 1,
-                'title' => str_repeat('a', 10),
-                'body' => str_repeat('a', 10),
-                'tag_string' => 'sample',
-            ]
-        );
-        $result = $this->Articles->save($article);
-
-        $this->assertSame('sample', $result->tags[0]->title);
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider dataProvider_validationDefault
      *
      * @param array $data
@@ -77,7 +87,7 @@ class ArticlesTableTest extends TestCase
     public function validationDefault(array $data, string $expected): void
     {
         $article = $this->Articles->newEntity($data);
-        $this->assertArrayHasKey($expected, $article->getErrors());
+        $this->assertSame([$expected], array_keys($article->getErrors()));
     }
 
     /**

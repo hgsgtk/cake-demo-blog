@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
@@ -24,8 +25,8 @@ class ArticlesTagsFixture extends TestFixture
                 'references' => ['tags', 'id'],
                 'update' => 'cascade',
                 'delete' => 'cascade',
-            ]
-        ]
+            ],
+        ],
     ];
 
     /**
@@ -39,6 +40,6 @@ class ArticlesTagsFixture extends TestFixture
         [
             'article_id' => 1,
             'tag_id' => 2,
-        ]
+        ],
     ];
 }

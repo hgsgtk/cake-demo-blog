@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Controller\Api;
 
-use App\Controller\Api\ArticlesController;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -9,7 +10,7 @@ use Cake\TestSuite\TestCase;
 /**
  * App\Controller\Api\ArticlesController Test Case
  */
-class ArticlesControllerTest extends TestCase
+final class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -19,7 +20,7 @@ class ArticlesControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Articles'
+        'app.Articles',
     ];
 
     /**
@@ -33,7 +34,7 @@ class ArticlesControllerTest extends TestCase
     {
         $this->configRequest([
             'headers' => [
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ],
         ]);
         $this->get('/api/articles/index');
@@ -66,7 +67,7 @@ class ArticlesControllerTest extends TestCase
                     'title' => 'First Article',
                     'slug' => 'first',
                     'body' => 'First Article Body',
-                    'published' => 1,
+                    'published' => true,
                     'created' => '2018-01-07T15:47:01+00:00',
                     'modified' => '2018-01-07T15:47:02+00:00',
                 ],
@@ -163,7 +164,7 @@ class ArticlesControllerTest extends TestCase
                 'title' => 'First Article',
                 'slug' => 'first',
                 'body' => 'First Article Body',
-                'published' => 1,
+                'published' => true,
                 'created' => '2018-01-07T15:47:01+00:00',
                 'modified' => '2018-01-07T15:47:02+00:00',
             ],

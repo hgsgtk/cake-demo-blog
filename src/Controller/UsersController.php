@@ -1,7 +1,7 @@
 <?php
-namespace App\Controller;
+declare(strict_types=1);
 
-use App\Controller\AppController;
+namespace App\Controller;
 
 /**
  * Users Controller
@@ -17,7 +17,7 @@ class UsersController extends AppController
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
@@ -45,7 +45,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Articles']
+            'contain' => ['Articles'],
         ]);
 
         $this->set('user', $user);
@@ -58,7 +58,7 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -81,7 +81,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -120,6 +120,8 @@ class UsersController extends AppController
      */
     public function login()
     {
+        // TODO move to AuthenticationMiddleware
+        // https://book.cakephp.org/authentication/1.1/en/migration-from-the-authcomponent.html#login-action
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {

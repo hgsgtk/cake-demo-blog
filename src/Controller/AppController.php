@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,11 +14,10 @@
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
-use App\Model\Entity\User;
 use Cake\Controller\Controller;
-use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -28,7 +29,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -38,13 +38,10 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
         $this->loadComponent('Flash');
 
         /*
@@ -55,6 +52,7 @@ class AppController extends Controller
 
         $this->loadComponent('Auth', [
             'authorized' => 'Controller',
+            // TODO move to AuthenticationMiddleware
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -67,14 +65,13 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login',
             ],
-            'unauthorizedRedirect' => $this->referer()
+            'unauthorizedRedirect' => $this->referer(),
         ]);
-
         $this->Auth->allow(['display', 'view', 'index']);
     }
 
     /**
-     * @param User $user login user
+     * @param \App\Model\Entity\User $user login user
      *
      * @return bool
      */

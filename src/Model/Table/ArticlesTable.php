@@ -1,9 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\Event\Event;
-use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
@@ -13,7 +12,7 @@ use Cake\Validation\Validator;
  * Class ArticlesTable
  * @package App\Model\Table
  *
- * @property TagsTable $Tags
+ * @property \App\Model\Table\TagsTable $Tags
  */
 class ArticlesTable extends Table
 {
@@ -22,22 +21,23 @@ class ArticlesTable extends Table
      *
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags');
     }
 
     /**
-     * @param Event $event Cake event
-     * @param Entity $entity ORM Entity
+     * @param \Cake\Event\Event $event Cake event
+     * @param \Cake\ORM\Entity $entity ORM Entity
      * @param array $options option parameters
      *
      * @return void
      */
     public function beforeSave($event, $entity, $options)
     {
-        if ($entity->tag_string) {
+        $tagString = $entity->get('tag_string');
+        if ($tagString) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
 
@@ -79,27 +79,27 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Validator $validator Cake Validator
+     * @param \Cake\Validation\Validator $validator Cake Validator
      *
-     * @return Validator
+     * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->allowEmptyString('title', false)
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
-            ->allowEmptyString('body', false)
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
     }
 
     /**
-     * @param Query $query Cake Query object
+     * @param \Cake\ORM\Query $query Cake Query object
      * @param array $options query options
      *
-     * @return Query
+     * @return \Cake\ORM\Query
      */
     public function findTagged(Query $query, array $options)
     {

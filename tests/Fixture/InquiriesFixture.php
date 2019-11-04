@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
@@ -9,7 +11,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class InquiriesFixture extends TestFixture
 {
-
     /**
      * Fields
      *
@@ -42,7 +43,7 @@ class InquiriesFixture extends TestFixture
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->records = [
             [
@@ -52,7 +53,7 @@ class InquiriesFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'client_ip' => 'Lorem ipsum dolor sit amet',
                 'created' => '2019-01-22 00:25:59',
-                'modified' => '2019-01-22 00:25:59'
+                'modified' => '2019-01-22 00:25:59',
             ],
         ];
         parent::init();

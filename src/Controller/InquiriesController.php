@@ -1,24 +1,21 @@
 <?php
-namespace App\Controller;
+declare(strict_types=1);
 
-use App\Controller\AppController;
-use App\Model\Table\InquiriesTable;
+namespace App\Controller;
 
 /**
  * Inquiries Controller
  *
- * @property InquiriesTable Inquiries
+ * @property \App\Model\Table\InquiriesTable $Inquiries
  *
  * @method \App\Model\Entity\Inquiry[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class InquiriesController extends AppController
 {
     /**
-     * @inheritdoc
-     *
-     * @return void
+     * @inheritDoc
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -47,7 +44,7 @@ class InquiriesController extends AppController
     public function view($id = null)
     {
         $inquiry = $this->Inquiries->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         $this->set('inquiry', $inquiry);

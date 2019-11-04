@@ -1,9 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
-
-use App\Model\Entity\User;
-use App\Model\Table\ArticlesTable;
 
 /**
  * Class ArticlesController
@@ -17,7 +15,7 @@ class ArticlesController extends AppController
      *
      * @throws \Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -54,11 +52,11 @@ class ArticlesController extends AppController
      */
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            $article->user_id = $this->Auth->user('id');
+            $article->set('user_id', $this->Auth->user('id'));
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
@@ -86,7 +84,7 @@ class ArticlesController extends AppController
             ->firstOrFail();
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
-                'accessibleFields' => ['user_id' => false]
+                'accessibleFields' => ['user_id' => false],
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
@@ -111,11 +109,16 @@ class ArticlesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
-        if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+        if (!$this->Articles->delete($article)) {
+            $this->log('Error while deleting article');
+
+            $this->Flash->error(__('It is failed to delete {0} article.', $article->title));
 
             return $this->redirect(['action' => 'index']);
         }
+        $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
+        return $this->redirect(['action' => 'index']);
     }
 
     /**
@@ -136,7 +139,7 @@ class ArticlesController extends AppController
     }
 
     /**
-     * @param User $user login user
+     * @param \App\Model\Entity\User $user login user
      *
      * @return bool
      */
