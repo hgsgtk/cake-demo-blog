@@ -60,7 +60,6 @@ class PagesController extends AppController
         }
         $this->set(compact('page', 'subpage'));
 
-
         try {
             $this->render('home');
             // FIXME failed RuntimeException: "View::$layout must be a non-empty string.To disable layout rendering use method View::disableAutoLayout() instead.
