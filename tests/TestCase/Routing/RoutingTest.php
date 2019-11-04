@@ -6,6 +6,10 @@ use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 
+/**
+ * Class RoutingTest
+ * @package App\Test\TestCase\Routing
+ */
 class RoutingTest extends TestCase
 {
     /**
@@ -23,7 +27,7 @@ class RoutingTest extends TestCase
      */
     public function Route正引き(string $url, array $expected, array $expected_pass)
     {
-        $this->markTestIncomplete('in progress...');
+        $this->markTestSkipped('in progress...');
 
         $actual = Router::parseRequest(new ServerRequest([
             'url' => $url,
@@ -46,7 +50,7 @@ class RoutingTest extends TestCase
      */
     public function Route逆引き(string $expected, array $parseArray)
     {
-        $this->markTestIncomplete('in progress...');
+        $this->markTestSkipped('in progress...');
 
         $this->assertSame($expected, Router::url($parseArray));
     }
@@ -100,7 +104,7 @@ class RoutingTest extends TestCase
      */
     public function apiプレフィックスRoute正引き()
     {
-        $this->markTestIncomplete('in progress...');
+        $this->markTestSkipped('in progress...');
 
         $actual = Router::parseRequest(new ServerRequest([
             'url'=> '/api/articles'
@@ -119,7 +123,7 @@ class RoutingTest extends TestCase
      */
     public function apiプレフィックスRoute逆引き()
     {
-        $this->markTestIncomplete('in progress...');
+        $this->markTestSkipped('in progress...');
 
         $this->assertSame('/api/articles', Router::url([
             'prefix' => 'api',
