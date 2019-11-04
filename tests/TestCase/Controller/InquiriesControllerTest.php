@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\InquiriesController;
@@ -10,7 +12,7 @@ use Cake\TestSuite\TestCase;
 /**
  * App\Controller\InquiriesController Test Case
  */
-class InquiriesControllerTest extends TestCase
+final class InquiriesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 

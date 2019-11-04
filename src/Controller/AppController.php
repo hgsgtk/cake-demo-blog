@@ -14,8 +14,10 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
+use App\Model\Entity\User;
 use Cake\Controller\Controller;
 
 /**
@@ -41,7 +43,9 @@ class AppController extends Controller
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler');
+        $this->loadComponent('RequestHandler', [
+            'enableBeforeRedirect' => false,
+        ]);
         $this->loadComponent('Flash');
 
         /*
@@ -49,5 +53,33 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+        $this->loadComponent('Auth', [
+            'authorized' => 'Controller',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password',
+                    ],
+                ],
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login',
+            ],
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+        $this->Auth->allow(['display', 'view', 'index']);
+    }
+
+    /**
+     * @param User $user login user
+     *
+     * @return bool
+     */
+    public function isAuthorized($user)
+    {
+        return false;
     }
 }

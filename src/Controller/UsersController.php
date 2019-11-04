@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -17,7 +19,7 @@ class UsersController extends AppController
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);

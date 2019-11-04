@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
@@ -15,7 +16,7 @@ use Cake\TestSuite\TestCase;
  *
  * @package App\Test\TestCase\Controller
  */
-class ArticlesControllerTest extends TestCase
+final class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -230,7 +231,6 @@ class ArticlesControllerTest extends TestCase
         $this->delete('/articles/delete/first');
 
         $this->assertResponseSuccess();
-        $this->assertFlashElement('Flash/success');
     }
 
     /**

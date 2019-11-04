@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Model\Entity;
 
 use App\Model\Entity\Article;
@@ -8,10 +10,12 @@ use Cake\TestSuite\TestCase;
 /**
  * App\Model\Entity\Article Test Case
  */
-class ArticleTest extends TestCase
+final class ArticleTest extends TestCase
 {
-
+    public $fixtures = ['app.Articles', 'app.Tags', 'app.ArticlesTags'];
+    
     /**
+     *
      * Test subject
      *
      * @var \App\Model\Entity\Article
@@ -23,7 +27,7 @@ class ArticleTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->Article = new Article();
@@ -34,7 +38,7 @@ class ArticleTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->Article);
 

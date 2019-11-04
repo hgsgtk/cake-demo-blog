@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -78,7 +80,7 @@ class PagesControllerTest extends IntegrationTestCase
         $this->get('/pages/not_existing');
 
         $this->assertResponseFailure();
-        $this->assertResponseContains('Missing Template');
+        $this->assertResponseContains('Missing templates');
         $this->assertResponseContains('Stacktrace');
         $this->assertResponseContains('not_existing.ctp');
     }

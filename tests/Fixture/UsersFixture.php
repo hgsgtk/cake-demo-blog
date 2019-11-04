@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\Fixture;
 
 use Cake\Auth\DefaultPasswordHasher;
@@ -38,7 +40,7 @@ class UsersFixture extends TestFixture
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $hasher = new DefaultPasswordHasher();
         $this->records = [
