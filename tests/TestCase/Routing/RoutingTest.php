@@ -23,6 +23,8 @@ class RoutingTest extends TestCase
      */
     public function Route正引き(string $url, array $expected, array $expected_pass)
     {
+        $this->markTestIncomplete('in progress...');
+
         $actual = Router::parseRequest(new ServerRequest([
             'url' => $url,
             'environment' => ['REQUEST_METHOD' => 'GET']
