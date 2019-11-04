@@ -122,6 +122,8 @@ class UsersController extends AppController
      */
     public function login()
     {
+        // TODO move to AuthenticationMiddleware
+        // https://book.cakephp.org/authentication/1.1/en/migration-from-the-authcomponent.html#login-action
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {

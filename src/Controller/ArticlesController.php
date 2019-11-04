@@ -59,7 +59,7 @@ class ArticlesController extends AppController
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            $article->user_id = $this->Auth->user('id');
+            $article->set('user_id', $this->Auth->user('id'));
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
@@ -67,6 +67,7 @@ class ArticlesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your article.'));
+
         }
         $tags = $this->Articles->Tags->find('list');
 

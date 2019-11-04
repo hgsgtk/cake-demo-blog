@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2",
+        "cakephp/authentication": "2.x-dev",
         "cakephp/cakephp": "4.x-dev",
         "cakephp/chronos": "2.x-dev",
         "cakephp/plugin-installer": "^1.0",

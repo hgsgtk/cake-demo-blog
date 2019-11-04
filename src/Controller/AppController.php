@@ -53,6 +53,7 @@ class AppController extends Controller
 
         $this->loadComponent('Auth', [
             'authorized' => 'Controller',
+            // TODO move to AuthenticationMiddleware
             'authenticate' => [
                 'Form' => [
                     'fields' => [
