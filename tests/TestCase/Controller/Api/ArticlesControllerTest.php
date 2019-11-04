@@ -11,7 +11,7 @@ use Cake\TestSuite\TestCase;
 /**
  * App\Controller\Api\ArticlesController Test Case
  */
-class ArticlesControllerTest extends TestCase
+final class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -68,7 +68,7 @@ class ArticlesControllerTest extends TestCase
                     'title' => 'First Article',
                     'slug' => 'first',
                     'body' => 'First Article Body',
-                    'published' => 1,
+                    'published' => true,
                     'created' => '2018-01-07T15:47:01+00:00',
                     'modified' => '2018-01-07T15:47:02+00:00',
                 ],
@@ -165,7 +165,7 @@ class ArticlesControllerTest extends TestCase
                 'title' => 'First Article',
                 'slug' => 'first',
                 'body' => 'First Article Body',
-                'published' => 1,
+                'published' => true,
                 'created' => '2018-01-07T15:47:01+00:00',
                 'modified' => '2018-01-07T15:47:02+00:00',
             ],

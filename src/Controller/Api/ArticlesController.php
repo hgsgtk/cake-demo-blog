@@ -17,7 +17,7 @@ class ArticlesController extends AppController
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -32,10 +32,10 @@ class ArticlesController extends AppController
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $this->set([
-            '_serialize' => ['articles'],
-            'articles' => $articles,
-        ]);
+        $this->viewBuilder()
+            ->setClassName('Json')
+            ->setOption('serialize', 'response');
+        $this->set(['response' => ['articles' => $articles]]);
     }
 
     /**
@@ -48,9 +48,9 @@ class ArticlesController extends AppController
     public function view($slug = null)
     {
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
-        $this->set([
-            '_serialize' => ['article'],
-            'article' => $article,
-        ]);
+        $this->viewBuilder()
+            ->setClassName('Json')
+            ->setOption('serialize', 'response');
+        $this->set(['response' => ['article' => $article]]);
     }
 }
