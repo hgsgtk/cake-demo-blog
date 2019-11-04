@@ -29,6 +29,7 @@ final class ArticlesTableTest extends TestCase
         'app.Articles',
         'app.Users',
         'app.Tags',
+        'app.ArticlesTags',
     ];
 
     /**
@@ -78,26 +79,6 @@ final class ArticlesTableTest extends TestCase
     /**
      * @test
      *
-     * @covers ::beforeSave
-     */
-    public function beforeSave_tag_stringに設定した値がtagsに設定されている()
-    {
-        $article = $this->Articles->newEntity(
-            [
-                'user_id' => 1,
-                'title' => str_repeat('a', 10),
-                'body' => str_repeat('a', 10),
-                'tag_string' => 'sample',
-            ]
-        );
-        $result = $this->Articles->save($article);
-
-        $this->assertSame('sample', $result->tags[0]->title);
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider dataProvider_validationDefault
      *
      * @param array $data
@@ -106,7 +87,7 @@ final class ArticlesTableTest extends TestCase
     public function validationDefault(array $data, string $expected): void
     {
         $article = $this->Articles->newEntity($data);
-        $this->assertArrayHasKey($expected, $article->getErrors());
+        $this->assertSame([$expected], array_keys($article->getErrors()));
     }
 
     /**

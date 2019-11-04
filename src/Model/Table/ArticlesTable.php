@@ -38,7 +38,8 @@ class ArticlesTable extends Table
      */
     public function beforeSave($event, $entity, $options)
     {
-        if ($entity->tag_string) {
+        $tagString = $entity->get('tag_string');
+        if ($tagString) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
 
@@ -87,10 +88,10 @@ class ArticlesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->allowEmptyString('title', null)
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
-            ->allowEmptyString('body', null)
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
