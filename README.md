@@ -1,6 +1,6 @@
 # Blog application for TDD demonstration driven by CakePHP
 
-[![Build Status](https://travis-ci.com/hgsgtk/blog.svg?branch=master)](https://travis-ci.com/hgsgtk/blog)
+[![Build Status](https://travis-ci.com/hgsgtk/cake-demo-blog.svg?branch=master)](https://travis-ci.com/hgsgtk/cake-demo-blog)
 
 A blog created by  [CakePHP](https://cakephp.org) 4.x.
 
