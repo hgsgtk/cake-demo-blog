@@ -16,7 +16,7 @@ final class ArticlesController extends AppController
      */
     public function view($slug = null)
     {
-        $article = $this->Articles->findBySlug($slug)->first();
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
 
         $this->viewBuilder()
             ->setClassName('Json')

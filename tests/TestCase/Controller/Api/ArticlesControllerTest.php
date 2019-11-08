@@ -17,11 +17,7 @@ final class ArticlesControllerTest extends TestCase
     public function testArticleDetailRequestReturnSuccessResponse(): void
     {
         // arrange
-        $this->configRequest([
-            'headers' => [
-                'Accept' => 'application/json',
-            ],
-        ]);
+        $this->configJsonRequest();
 
         // act
         $this->get('/api/articles/view/first');
@@ -33,11 +29,7 @@ final class ArticlesControllerTest extends TestCase
     public function testArticleDetailReturnArticleResource(): void
     {
         // arrange
-        $this->configRequest([
-            'headers' => [
-                'Accept' => 'application/json',
-            ],
-        ]);
+        $this->configJsonRequest();
 
         // act
         $this->get('/api/articles/view/first');
@@ -56,5 +48,26 @@ final class ArticlesControllerTest extends TestCase
             ],
         ], JSON_PRETTY_PRINT);
         $this->assertSame($expected, $this->_getBodyAsString());
+    }
+
+    public function testArticleDetailReturn404NotFound(): void
+    {
+        // arrange
+        $this->configJsonRequest();
+
+        // act
+        $this->get('/api/articles/view/notfound');
+
+        // assertion
+        $this->assertResponseCode(404);
+    }
+
+    private function configJsonRequest(): void
+    {
+        $this->configRequest([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ]);
     }
 }
