@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-
 namespace App\Service;
-
 
 use Cake\Datasource\ModelAwareTrait;
 use Cake\Log\LogTrait;
@@ -26,7 +24,7 @@ abstract class AppService
 
     /**
      * AppService constructor.
-     * @param null $name
+     * @param null $name Parameter object name
      */
     public function __construct($name = null)
     {
@@ -35,14 +33,15 @@ abstract class AppService
         }
 
         if ($this->name === null) {
-            list(, $name) = namespaceSplit(get_class($this));
+            [, $name] = namespaceSplit(static::class);
             $this->name = substr($name, 0, -10);
         }
         $this->initialize();
     }
 
     /**
-     *
+     * Initialize
+     * @return void
      */
     public function initialize()
     {
@@ -50,12 +49,11 @@ abstract class AppService
     }
 
     /**
-     * @param $name
+     * @param string $name Parameter object name
      * @return \Cake\Datasource\RepositoryInterface
      */
     public function __get($name)
     {
         return $this->loadModel($name);
     }
-
 }
