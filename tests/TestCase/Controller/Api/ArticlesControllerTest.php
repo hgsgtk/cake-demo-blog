@@ -10,6 +10,10 @@ final class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
+    public $fixtures = [
+        'app.Articles'
+    ];
+
     public function testArticleDetailRequestReturnSuccessResponse(): void
     {
         // arrange
