@@ -9,6 +9,22 @@ use App\Lib\Payment\CardCharger;
 
 final class OrderCharge extends AppService
 {
+    /**
+     * @var CardCharger
+     */
+    private $charger;
+
+    /**
+     * OrderCharge constructor.
+     * @param CardCharger $charger
+     */
+    public function __construct(CardCharger $charger)
+    {
+        parent::__construct();
+
+        $this->charger = $charger;
+    }
+
     public function execute(array $customer, int $purchaseAmount): bool
     {
         // Start transaction
@@ -21,11 +37,12 @@ final class OrderCharge extends AppService
             'purchaseAmount' => $purchaseAmount,
             // ...
         ];
-        $charger = new CardCharger();
-        if (!$charger->send($charge)) {
+        if (!$this->charger->send($charge)) {
             // Rollback transaction
+            return false;
         }
 
         // Commit transaction
+        return true;
     }
 }
